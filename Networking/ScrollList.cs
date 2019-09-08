@@ -20,8 +20,8 @@ namespace HappyUnity
         public void CreateList<T>(string webRequest, Action<GameObject, T> itemOperation, GameObject buttonPrefab, RectTransform scrollPanel)
         {
             var json = webRequest;
-            JsonConverter g = new VectorConverter(true,true,true);
-            var results = JsonConvert.DeserializeObject<IEnumerable<T>>(json,g);
+            //VectorConverter g = new VectorConverter(true,true,true);
+            var results = JsonConvert.DeserializeObject<IEnumerable<T>>(json); // , g
 
             foreach (var result in results)
             {

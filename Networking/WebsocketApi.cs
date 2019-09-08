@@ -5,8 +5,10 @@ using System.Linq;
 using HappyUnity.Singletons;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using UnityEngine;
 using WebSocketSharp;
+using ErrorEventArgs = WebSocketSharp.ErrorEventArgs;
 
 public class WebsocketApi : PersistentSingleton<WebsocketApi>
 {

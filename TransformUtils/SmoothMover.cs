@@ -1,48 +1,56 @@
 ﻿using HappyUnity.Math;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace HappyUnity.TransformUtils
 {
     public class SmoothMover : MonoBehaviour
     {
-        public Vector3 TargetPosition { get; set; }
-        public float SmoothTime;
+        public Transform TargetPosition { get; set; }
+        public float smoothTime;
+        public float maxSpeed;
+       
         private Vector3 velocity = Vector3.zero;
-        private bool stopWhenReach;
-        public bool Moving { get; private set; }
-        public float EndPrecision = 0.0001f;
-        public bool UseFixedDeltaTime;
+        private bool _moving;
+        public bool stopWhenReach;
+
+        public float endPrecision = 0.0001f;
+        public bool useFixedDeltaTime;
 
         public void BeginMoving(bool stopWhenReach = true)
         {
             this.stopWhenReach = stopWhenReach;
-            Moving = true;
+            _moving = true;
         }
 
         public void StopMoving()
         {
-            Moving = false;
+            _moving = false;
             velocity = Vector3.zero;
         }
-
-        protected virtual void Update()
+    
+        
+        /// <summary>
+        /// Should be played in Update mode
+        /// </summary>
+        public void Move()
         {
-            if (Moving)
+            if (_moving)
             {
-                if (TargetPosition.PrecisionEquals(transform.position, EndPrecision))
+                if (TargetPosition.position.PrecisionEquals(transform.position, endPrecision))
                 {
-                    transform.position = TargetPosition;
+                    transform.position = TargetPosition.position;
                     velocity = Vector3.zero;
                     if (stopWhenReach)
                     {
-                        Moving = false;
+                        _moving = false;
                     }
                 }
                 else
                 {
-                    Vector3 newPosition = Vector3.SmoothDamp(transform.position, TargetPosition, ref velocity,
-                        SmoothTime,
-                        Mathf.Infinity, UseFixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
+                    Vector3 newPosition = Vector3.SmoothDamp(transform.position, TargetPosition.position, ref velocity,
+                        smoothTime,
+                        maxSpeed, useFixedDeltaTime ? Time.fixedDeltaTime : Time.deltaTime);
                     transform.position = newPosition;
                 }
             }
