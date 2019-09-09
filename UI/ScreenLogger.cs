@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using HappyUnity.Singletons;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +30,7 @@ namespace HappyUnity.UI
             _outPut = builder.ToString();
         }
 
-        public virtual void PushTextMessage(in TextMeshProUGUI text, in string message)
+        public virtual void PushTextMessage(in Text text, in string message)
         {
             if (text)
                 text.text = message;
