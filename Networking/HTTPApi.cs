@@ -61,6 +61,47 @@ namespace HappyUnity.Networking
             Debug.Log($"status from PUT {resp.StatusCode}");
             resp.EnsureSuccessStatusCode();
         }
+        
+        public static async Task<D> PatchAsync<T, D>(string requestUri, T content, string fieldName)
+        {
+            if (requestUri == null) throw new ArgumentNullException(nameof(requestUri));
+            string json = await PatchInternalAsync(requestUri, content, fieldName);
+            return JsonConvert.DeserializeObject<D>(json);
+        }
+        
+        /// <summary>
+        /// Patch internal method
+        /// </summary>
+        /// <param name="requestUri"></param>
+        /// <param name="content"></param>
+        /// <param name="fieldName">Field name for new JObject </param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        private static async Task<string> PatchInternalAsync<T>(string requestUri, T content, string fieldName)
+        {
+            if (requestUri == null) throw new ArgumentNullException(nameof(requestUri));
+            if (_httpClient.BaseAddress == null)
+            {
+                InitialyzeHTTPClient("//todo");
+            }
+
+            string json = JsonConvert.SerializeObject(content);
+
+            JObject message = new JObject();
+            message.Add("state",JToken.Parse(json));
+
+            HttpResponseMessage resp = new HttpResponseMessage();
+            var request = new HttpRequestMessage(new HttpMethod("PATCH"), requestUri)
+            {
+                Content = new StringContent(message.ToString(), Encoding.UTF8,
+                    "application/json")
+            };
+
+            resp = await _httpClient.SendAsync(request);
+
+            return await resp.Content.ReadAsStringAsync();
+        }
 
         public static async Task DeleteAsync(string requestUri)
         {
