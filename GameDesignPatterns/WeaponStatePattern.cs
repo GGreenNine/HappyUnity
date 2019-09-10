@@ -258,6 +258,7 @@ namespace DefaultNamespace
         /// </summary>
         public virtual void WeaponUse()
         {
+            On_ammoCountChanged?.Invoke();
         }
 
         /// <summary>
@@ -280,10 +281,10 @@ namespace DefaultNamespace
         /// <summary>
         /// Seting the owner of a current weapon
         /// </summary>
-//        public void DefineOwner<T>(T owner) where T : AsteroidsGameBehaviour
-//        {
-//            this.owner = owner;
-//        }
+        public void DefineOwner<T>(T owner) where T : MonoBehaviour
+        {
+            this.owner = owner;
+        }
 
         /// <summary>
         /// Determines whether or not the weapon can fire
@@ -303,6 +304,8 @@ namespace DefaultNamespace
                     {
                         CurrentAmmoLoaded -= AmmoConsumedPerShot;
                         WeaponState = (WeaponStates.WeaponUse);
+                        if (!EnoughAmmoToFire() && IsGradualBased)
+                            StartCoroutine(AutoAmmoFilling());
                     }
                     else
                     {
