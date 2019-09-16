@@ -61,6 +61,47 @@ namespace HappyUnity.Networking
             Debug.Log($"status from PUT {resp.StatusCode}");
             resp.EnsureSuccessStatusCode();
         }
+        
+        public static async Task<D> PatchAsync<T, D>(string requestUri, T content, string fieldName)
+        {
+            if (requestUri == null) throw new ArgumentNullException(nameof(requestUri));
+            string json = await PatchInternalAsync(requestUri, content, fieldName);
+            return JsonConvert.DeserializeObject<D>(json);
+        }
+        
+        /// <summary>
+        /// Patch internal method
+        /// </summary>
+        /// <param name="requestUri"></param>
+        /// <param name="content"></param>
+        /// <param name="fieldName">Field name for new JObject </param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        private static async Task<string> PatchInternalAsync<T>(string requestUri, T content, string fieldName)
+        {
+            if (requestUri == null) throw new ArgumentNullException(nameof(requestUri));
+            if (_httpClient.BaseAddress == null)
+            {
+                InitialyzeHTTPClient("//todo");
+            }
+
+            string json = JsonConvert.SerializeObject(content);
+
+            JObject message = new JObject();
+            message.Add("state",JToken.Parse(json));
+
+            HttpResponseMessage resp = new HttpResponseMessage();
+            var request = new HttpRequestMessage(new HttpMethod("PATCH"), requestUri)
+            {
+                Content = new StringContent(message.ToString(), Encoding.UTF8,
+                    "application/json")
+            };
+
+            resp = await _httpClient.SendAsync(request);
+
+            return await resp.Content.ReadAsStringAsync();
+        }
 
         public static async Task DeleteAsync(string requestUri)
         {
@@ -112,8 +153,7 @@ namespace HappyUnity.Networking
 
         private static void DefaultDelete(string api, Action<UnityWebRequest> callback)
         {
-            using (var entry = UnityWebRequest.Delete(_serverAdress + api))
-            {
+            var entry = UnityWebRequest.Delete(_serverAdress + api);
                 entry.SetRequestHeader("Authorization", "Token ");
                 var sendWebRequest = entry.SendWebRequest();
 
@@ -122,18 +162,15 @@ namespace HappyUnity.Networking
 
                 sendWebRequest.completed += operation =>
                 {
-                    if (entry != null)
+                    if (entry.isNetworkError || entry.isHttpError)
                     {
-                        if (entry.isNetworkError || entry.isHttpError)
-                        {
-                            Debug.Log(entry.error.ToString());
-                            Debug.Log(entry.downloadHandler.text);
-                        }
-
-                        callback(entry);
+                        Debug.Log(entry.error.ToString());
+                        Debug.Log(entry.downloadHandler.text);
                     }
+
+                    callback(entry);
+                    entry.Dispose();
                 };
-            }
         }
 
         private static void DefaultPost(string api, string jsonString, Action<UnityWebRequest> Callback)
@@ -148,20 +185,20 @@ namespace HappyUnity.Networking
 
             sendWebRequest.completed += delegate(AsyncOperation operation)
             {
-                if (entry != null && (entry.isNetworkError || entry.isHttpError))
+                if ((entry.isNetworkError || entry.isHttpError))
                 {
                     Debug.LogException(new WebException(entry.error));
                     return;
                 }
 
                 Callback(entry);
+                entry.Dispose();
             };
         }
 
         private static void DefaultPatch(string api, string json, Action<UnityWebRequest> callback)
         {
-            using (var entry = UnityWebRequest.Put(_serverAdress + api, json))
-            {
+            var entry = UnityWebRequest.Put(_serverAdress + api, json);
                 entry.method = "PATCH";
                 entry.SetRequestHeader("Authorization", "Token ");
                 entry.SetRequestHeader("Content-Type", "application/json");
@@ -170,19 +207,15 @@ namespace HappyUnity.Networking
 
                 sendWebRequest.completed += operation =>
                 {
-                    if (entry != null)
+                    if (entry.isNetworkError || entry.isHttpError)
                     {
-                        if (entry.isNetworkError != null
-                            || entry.isHttpError != null)
-                        {
-                            Debug.Log(entry.error.ToString());
-                            Debug.Log(entry.downloadHandler.text);
-                        }
-
-                        callback(entry);
+                        Debug.Log(entry.error.ToString());
+                        Debug.Log(entry.downloadHandler.text);
                     }
+
+                    callback(entry);
+                    entry.Dispose();
                 };
-            }
         }
 
         #endregion

@@ -3,8 +3,7 @@ using System.Globalization;
 using System.Net;
 using UnityEngine;
 
-
-namespace HappyUnity.Network
+namespace HappyUnity.Networking
 {
     public static class NetworkDateTime
     {

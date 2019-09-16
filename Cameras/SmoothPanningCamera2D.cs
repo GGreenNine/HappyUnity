@@ -51,7 +51,7 @@ namespace HappyUnity.Cameras
         {
             oldPosition = transform.position;
             lastMousePosition = Input.mousePosition;
-            smoothMover.TargetPosition = oldPosition;
+            //smoothMover.TargetPosition = oldPosition; todo
             smoothMover.BeginMoving(false);
         }
 
@@ -92,7 +92,7 @@ namespace HappyUnity.Cameras
             }
 
             oldPosition = newPosition;
-            smoothMover.TargetPosition = oldPosition;
+            //smoothMover.TargetPosition = oldPosition; todo
         }
 
         private void Update()
