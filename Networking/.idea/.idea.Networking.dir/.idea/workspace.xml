@@ -9,28 +9,23 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HTTPApi.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-928">
+            <state relative-caret-position="16">
               <caret line="82" selection-start-line="82" selection-end-line="82" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/WebsocketApi.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="12" column="61" selection-start-line="12" selection-start-column="61" selection-end-line="12" selection-end-column="61" />
               <folding>
-                <marker date="1566226516458" expanded="true" signature="6:305" ph="..." />
-                <marker date="1566226516458" expanded="true" signature="338:6452" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="372:6449" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="664:743" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="813:1611" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="3900:4686" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="3987:4680" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="4312:4669" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="4348:4655" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="4433:4599" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="5608:6447" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="5698:6441" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="6040:6430" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="6076:6416" ph="{...}" />
-                <marker date="1566226516458" expanded="true" signature="6195:6361" ph="{...}" />
+                <element signature="e#0#304#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,6 +38,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/HTTPApi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/WebsocketApi.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -97,11 +93,13 @@
       <option name="presentableId" value="Default" />
       <updated>1566226073151</updated>
       <workItem from="1566226076588" duration="1639000" />
+      <workItem from="1569971764747" duration="24000" />
+      <workItem from="1569971809361" duration="10000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1639000" />
+    <option name="totallyTimeSpent" value="1673000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -115,17 +113,9 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24949698" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2562039" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="NuGet" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Unit Tests" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Performance Profiler" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
@@ -133,18 +123,26 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Errors In Solution" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Unit Tests Coverage" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info anchor="bottom" id="Performance Profiler" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Unit Tests" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="13" />
+      <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -157,27 +155,20 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/WebsocketApi.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="61" selection-start-line="12" selection-start-column="61" selection-end-line="12" selection-end-column="61" />
+          <folding>
+            <element signature="e#0#304#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HTTPApi.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-928">
+        <state relative-caret-position="16">
           <caret line="82" selection-start-line="82" selection-end-line="82" />
-          <folding>
-            <marker date="1566226516458" expanded="true" signature="6:305" ph="..." />
-            <marker date="1566226516458" expanded="true" signature="338:6452" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="372:6449" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="664:743" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="813:1611" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="3900:4686" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="3987:4680" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="4312:4669" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="4348:4655" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="4433:4599" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="5608:6447" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="5698:6441" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="6040:6430" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="6076:6416" ph="{...}" />
-            <marker date="1566226516458" expanded="true" signature="6195:6361" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>

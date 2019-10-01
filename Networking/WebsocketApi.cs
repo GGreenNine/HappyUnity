@@ -10,7 +10,7 @@ using UnityEngine;
 using WebSocketSharp;
 using ErrorEventArgs = WebSocketSharp.ErrorEventArgs;
 
-public class WebsocketApi : PersistentSingleton<WebsocketApi>
+public class WebsocketApi : EverlastingSingleton<WebsocketApi>
 {
     public delegate void ConnectionStateHangler();
     public event ConnectionStateHangler onConnected;
