@@ -16,7 +16,7 @@ namespace HappyUnity.Spawners.ObjectPools
         void Awake()
         {
             InstantiationGuard();
-            ExecuteEvents.Execute<IPoolableAware>(gameObject, null, (script, ignored) => script.PoolableAwoke(this));
+            ExecuteEvents.Execute<IPoolableExcecution>(gameObject, null, (script, ignored) => script.PoolableExcecution(this));
         }
 
         void InstantiationGuard()
@@ -54,21 +54,15 @@ namespace HappyUnity.Spawners.ObjectPools
         }
     }
 
-//============================================================================
-
-    public interface IPoolableAware : IEventSystemHandler
+    public interface IPoolableExcecution : IEventSystemHandler
     {
-        void PoolableAwoke(Poolable p);
+        void PoolableExcecution(Poolable p);
     }
-
-//============================================================================
 
     public interface IRecyclable
     {
         void Recycle();
     }
-
-//============================================================================
 
     public abstract class Parkable : MonoBehaviour
     {

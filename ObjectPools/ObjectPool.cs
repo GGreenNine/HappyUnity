@@ -35,21 +35,21 @@ namespace HappyUnity.Spawners.ObjectPools
             return (Poolable)parking.Unpark();
     }
 
-    public static ObjectPool Build(GameObject prefab, int initialClones, int initialCapacity)
+    public static ObjectPool New(GameObject prefab, int initialClones, int initialCapacity)
     {
-        ObjectPool pool = CreateInstance<ObjectPool>();
+        var pool = CreateInstance<ObjectPool>();
         pool.Initialize(prefab, initialClones, initialCapacity);
         return pool;
     }
 
-    void Initialize(GameObject prefab, int initialClones, int capacity)
+    private void Initialize(GameObject prefab, int initialClones, int capacity)
     {
         this.prefab = prefab;
         parking = ParkingStorage.InfiniteSpace(capacity);
         ParkInitialClones(initialClones);
     }
 
-    void ParkInitialClones(int initialClones)
+    private void ParkInitialClones(int initialClones)
     {
         for (int i = 0; i < initialClones; ++i)
             parking.Park(Clone());
@@ -62,8 +62,6 @@ namespace HappyUnity.Spawners.ObjectPools
         return p;
     }
 }
-
-//============================================================================
 
 [Serializable]
 public class ParkingStorage
@@ -83,7 +81,7 @@ public class ParkingStorage
         return p;
     }
 
-    public bool IsEmpty { get { return fauxStack.Count == 0; } }
+    public bool IsEmpty => fauxStack.Count == 0;
 
     public void Park(Parkable p)
     {
@@ -93,17 +91,17 @@ public class ParkingStorage
 
     public Parkable Unpark()
     {
-        Parkable p = PopFauxStack();
+        Parkable p = Pop();
         p.Unpark();
         return p;
     }
 
-    void PushFauxStack(Parkable p)
+    private void PushFauxStack(Parkable p)
     {
         fauxStack.Add(p);
     }
 
-    Parkable PopFauxStack()
+    private Parkable Pop()
     {
         var lastIndex = fauxStack.Count - 1;
         Parkable p = fauxStack[lastIndex];

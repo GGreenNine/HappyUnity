@@ -89,7 +89,7 @@ public class MessageManager : Singleton<MessageManager>
         Debug.Log("Get Uncompressed " + sizeof(byte) * decBa.Length);
         float[] f = ToFloatArray(decBa);
         
-        UnityMainThreadDispatcher.Instance().Enqueue(delegate
+        MainThreadDispatcher.Instance().Enqueue(delegate
         {
             source.clip = AudioClip.Create("test", f.Length, chan, frequency, false);
             source.clip.SetData(f, 0);
