@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using HappyUnity.Math;
 using HappyUnity.Singletons;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -89,7 +90,7 @@ public class MessageManager : Singleton<MessageManager>
         Debug.Log("Get Uncompressed " + sizeof(byte) * decBa.Length);
         float[] f = ToFloatArray(decBa);
         
-        MainThreadDispatcher.Instance().Enqueue(delegate
+        MainThreadDispatcher.Instance.Enqueue(delegate
         {
             source.clip = AudioClip.Create("test", f.Length, chan, frequency, false);
             source.clip.SetData(f, 0);

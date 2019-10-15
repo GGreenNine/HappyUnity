@@ -29,6 +29,35 @@ namespace HappyUnity.Math
             return (UnityEngine.Random.Range(0,100) <= percent);
         }
         
+
+       
+    }
+
+    public static class QuaternionExtensions
+    {
+        public static bool ApproximatelyEqual(this Quaternion q1, Quaternion q2, float precision)
+        {
+            return Mathf.Abs(Quaternion.Dot(q1, q2)) >= 1 - precision;
+        }
+    }
+
+    public static class VectorExtensions
+    {
+        public static bool ApproximatelyEqual(this Vector2 current, Vector2 other, float precision)
+        {
+            return Vector2.SqrMagnitude(current - other) < precision;
+        }
+
+        public static bool ApproximatelyEqual(this Vector3 lhs, Vector3 rhs, float precision)
+        {
+            return Vector3.SqrMagnitude(lhs - rhs) < precision;
+        }
+
+        public static bool ApproximatelyEqual(this Vector4 lhs, Vector4 rhs, float precision)
+        {
+            return Vector4.SqrMagnitude(lhs - rhs) < precision;
+        }
+        
         /// <summary>
         /// Projects a point on a line (perpendicularly) and returns the projected point.
         /// </summary>
@@ -36,7 +65,7 @@ namespace HappyUnity.Math
         /// <param name="point">Point.</param>
         /// <param name="lineStart">Line start.</param>
         /// <param name="lineEnd">Line end.</param>
-        public static Vector3 ProjectPointOnLine(Vector3 point, Vector3 lineStart, Vector3 lineEnd)
+        public static Vector3 ProjectPointOnLine(this Vector3 point, Vector3 lineStart, Vector3 lineEnd)
         {
             Vector3 rhs = point - lineStart;
             Vector3 vector2 = lineEnd - lineStart;
@@ -49,6 +78,7 @@ namespace HappyUnity.Math
             float num2 = Mathf.Clamp(Vector3.Dot(lhs, rhs), 0f, magnitude);
             return (lineStart + ((Vector3)(lhs * num2)));
         }
-    }  
+    }
+    
 }
 
