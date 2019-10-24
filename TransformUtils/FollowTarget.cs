@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class FollowTarget : MonoBehaviour
     {
         [Header("Activity")] public bool FollowPosition = true;
         public bool FollowRotation = true;
-
+        
+        [Header("Locking")]
+        public bool LockRotationByX;
+        public bool LockRotationByY;
+        public bool LockRotationByZ;
+        
         [Header("Target")] public Transform Target;
         public Vector3 Offset;
 
@@ -40,14 +46,19 @@ public class FollowTarget : MonoBehaviour
 
         protected Quaternion _newTargetRotation;
         protected Quaternion _initialRotation;
-
+        
+        
+        [HideInInspector]
+        public bool Lock = false;
+        
         /// <summary>
         /// On start we store our initial position
         /// </summary>
-        protected virtual void Start()
+        public virtual void Initialize()
         {
             SetInitialPosition();
             SetOffset();
+            SetPostion();
         }
 
         /// <summary>
@@ -55,16 +66,46 @@ public class FollowTarget : MonoBehaviour
         /// </summary>
         public virtual void StopFollowing()
         {
+            if(this.Lock)
+                return;
+            
+            Target = null;
             FollowPosition = false;
         }
 
         /// <summary>
         /// Makes the object follow the target
         /// </summary>
-        public virtual void StartFollowing()
+        public virtual void StartFollowing(bool Lock = false)
         {
+            if(this.Lock)
+                return;
+            
+            this.Lock = Lock;
             FollowPosition = true;
             SetInitialPosition();
+        }
+
+        /// <summary>
+        /// Setting target
+        /// </summary>
+        public void SetTarget(Transform target)
+        {
+            if(this.Lock)
+                return;
+            
+            Target = target;
+            Initialize();
+        }
+
+        public void Unlock()
+        {
+            this.Lock = false;
+        }
+
+        public void SetPostion()
+        {
+            transform.position = Target.position;
         }
 
         /// <summary>
@@ -167,21 +208,26 @@ public class FollowTarget : MonoBehaviour
                 return;
             }
 
-            if (!FollowPosition)
+            if (!FollowRotation)
             {
                 return;
             }
 
             _newTargetRotation = Target.rotation;
 
+            var rotationX = LockRotationByX ? transform.rotation.x : _newTargetRotation.x; 
+            var rotationY = LockRotationByY ? transform.rotation.y : _newTargetRotation.y; 
+            var rotationZ = LockRotationByZ ? transform.rotation.z : _newTargetRotation.z; 
+
+            
             if (InterpolateRotation)
             {
-                this.transform.rotation = Quaternion.Lerp(this.transform.rotation, _newTargetRotation,
+                this.transform.rotation = Quaternion.Lerp(this.transform.rotation, new Quaternion(rotationX, rotationY, rotationZ, transform.rotation.w), 
                     Time.deltaTime * FollowRotationSpeed);
             }
             else
             {
-                this.transform.rotation = _newTargetRotation;
+                this.transform.rotation = new Quaternion(rotationX, rotationY, rotationZ, transform.rotation.w);
             }
         }
     }

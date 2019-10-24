@@ -1,12 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using FlowCanvas.Nodes;
+using HappyUnity.Data;
 using HappyUnity.UI;
 using UnityEngine;
 using UnityEngine.Events;
+
+#if ValveVR
 using Valve.VR.InteractionSystem;
 using Valve.VR.InteractionSystem.Sample;
+#endif
 
 namespace HappyUnity.VR
 {
@@ -19,6 +22,7 @@ namespace HappyUnity.VR
         public UnityEvent OnDetachEvent;
         public AttachmentType attachmentType;
 
+        
         public delegate void OnInteractDelegate();
 
         public event OnInteractDelegate On_Attached;
@@ -40,6 +44,7 @@ namespace HappyUnity.VR
             DetachFromPoint(other.gameObject);
         }
 
+#if ValveVR
         private void Valve_VR_DetachFromHand(GameObject g)
         {
             if (g.gameObject.GetComponent<Throwable>() == null) return;
@@ -49,14 +54,15 @@ namespace HappyUnity.VR
             if (s != null)
                 s.DetachObject(g.gameObject);
         }
+#endif
 
         private void AttachToPoint(Transform g)
         {
             if (attached.Contains(g.gameObject))
                 return;
-
+#if ValveVR
             Valve_VR_DetachFromHand(g.gameObject);
-
+#endif
 
             OnAttachEvent.Invoke();
             On_Attached?.Invoke();
@@ -88,7 +94,7 @@ namespace HappyUnity.VR
 
             OnDetachEvent.Invoke();
             On_Detached?.Invoke();
-            
+
             attached.Remove(g);
         }
 
