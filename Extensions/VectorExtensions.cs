@@ -61,6 +61,18 @@ namespace HappyUnity.Extensions
         }
         
         /// <summary>
+        /// Sets given object on the direction by distance X
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="start"></param>
+        /// <param name="rayDot"></param>
+        /// <param name="distance"></param>
+        public static void SetPointOnTheLine(this Vector3 direction,Vector3 start, GameObject rayDot, float distance)
+        {
+            rayDot.transform.position = direction * distance + start;
+        }
+        
+        /// <summary>
         /// Changes Z position
         /// </summary>
         /// <param name="current"></param>
