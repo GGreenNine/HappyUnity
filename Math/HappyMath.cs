@@ -29,6 +29,31 @@ namespace HappyUnity.Math
             return (UnityEngine.Random.Range(0,100) <= percent);
         }
         
+        /// <summary>
+        /// Compares 2 floating point numbers to an approximate value
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="precision"></param>
+        /// <returns></returns>
+        public static bool ApproximatelyEqual(float first, float second, float precision)
+        {
+            return Mathf.Abs(first - second ) <= precision;
+        }
+        
+        /// <summary>
+        /// Calls OverlapSphereNonAlloc* and checks if an object exists in this area
+        /// </summary>
+        /// <param name="place"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static bool FindColliders(Vector3 place, Collider target, float area)
+        {
+            Collider[] colliders = { };
+            Physics.OverlapSphereNonAlloc(place, area,colliders );
+            return colliders.Any(colOut => colOut == target);
+        }
+        
     }
 
 
