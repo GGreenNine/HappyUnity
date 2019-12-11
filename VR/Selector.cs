@@ -42,15 +42,6 @@ namespace Stereometry.Scripts.MiniBehaviours
             hand = GetComponent<Hand>();
         }
 
-        private void Start()
-        {
-            InputManager.OnObjectSelectedOn += OnSelected;
-        }
-
-        private void OnDestroy()
-        {
-            InputManager.OnObjectSelectedOn -= OnSelected;
-        }
 
         /// <summary>
         /// Unselecting all selected items

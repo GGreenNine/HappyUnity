@@ -18,6 +18,18 @@ namespace HappyUnity.Extensions
         }
         
         /// <summary>
+        /// Checks the approximate position of vectors
+        /// </summary>
+        /// <param name="lhs"></param>
+        /// <param name="rhs"></param>
+        /// <param name="precision"></param>
+        /// <returns></returns>
+        public static bool ApproximatelyEqual(this Vector3 current, Vector3 other, float precision)
+        {
+            return Vector2.SqrMagnitude(current - other) < precision;
+        }
+        
+        /// <summary>
         /// Projects a point on a line (perpendicularly) and returns the projected point.
         /// </summary>
         /// <returns>The point on line.</returns>
