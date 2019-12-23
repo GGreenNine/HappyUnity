@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
+using HappyUnity.Alghoritms;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Delaunay
-{
     public static class RandomExtensions
     {
         /// <summary>
@@ -59,7 +58,16 @@ namespace Delaunay
             var point = new Vector2((num * (float)(Math.Cos(f))) + 1500, (num * (float)(Math.Sin(f))+1500));
             return point;
         }
+        
+        /// <summary>
+        /// Generates a random point inside the circle with specified radius.
+        /// </summary>
+        public static Point InCircleGetPoint(this Random r, float radius = 1f)
+        {
+            var   num   = radius * (float)Math.Sqrt(r.NextFloat(0, 1));
+            float f     = RandomAngleRadians(r);
+            var   point = new Point((num * (float)(Math.Cos(f))) + 1500, (num * (float)(Math.Sin(f))+1500));
+            return point;
+        }
 
     }
-    
-}
