@@ -113,6 +113,19 @@ namespace KouXiaGu.BinaryHeap
             return result;
         }
 
+        public void UpdateItem(T item)
+        {
+            for (int i = 0; i < collection.Count; i++)
+            {
+                var s = collection[i];
+                if (item.Equals(s))
+                {
+                    BubbleUp(i);
+                }
+            }
+        }
+        
+
         public bool Contains(T item)
         {
             return collection.Contains(item);
@@ -129,6 +142,8 @@ namespace KouXiaGu.BinaryHeap
             collection.Add(default(T));
         }
 
+        
+        
         void BubbleUp(int index)
         {
             int currentIndex = index;

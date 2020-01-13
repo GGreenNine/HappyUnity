@@ -13,7 +13,14 @@ namespace HappyUnity.Alghoritms
     {
         public TilesGrid grid;
 
+        public Transform target;
         public IEnumerable<Node> Path;
+
+        private void Update()
+        {
+            Vector3Int target = new Vector3Int((int)this.target.transform.position.x,(int)this.target.transform.position.y,(int)this.target.transform.position.z);
+            GetPath(target);
+        }
 
         public IEnumerable<Node> GetPath(Vector3Int targetPos)
         {
@@ -60,6 +67,10 @@ namespace HappyUnity.Alghoritms
                         if (!openStack.Contains(neighbour))
                         {
                             openStack.Add(neighbour);
+                        }
+                        else
+                        {
+                            openStack.UpdateItem(neighbour);
                         }
                     }
                 }
